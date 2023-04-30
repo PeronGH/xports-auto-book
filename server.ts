@@ -33,6 +33,11 @@ router.post("/book", async (ctx) => {
   }
 });
 
+router.get("/book:id", (ctx) => {
+  const { id } = ctx.params;
+  ctx.response.body = db.get(["tasks", id]);
+});
+
 router.get("/run", async (ctx) => {
   const tasks = db.list<RequestParams>({ prefix: ["tasks"] });
   const removeTaskKeys: Promise<void>[] = [];
