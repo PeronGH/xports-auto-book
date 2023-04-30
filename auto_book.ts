@@ -8,6 +8,7 @@ import {
   queryVenueServices,
   singleTicketOrder,
 } from "./api.ts";
+import { parseDate } from "./utils.ts";
 
 export async function autoBook(
   { netUserId, date, timeName, serviceName }: AutoBookParams,
@@ -74,7 +75,9 @@ export async function autoBook(
     order.tradeId.toString(),
   );
 
-  const couponItem = couponList.find((item) => item.balance > order.payFee);
+  const couponItem = couponList.find((item) =>
+    parseDate(item.expireDate) > new Date() && item.balance > order.payFee
+  );
   if (!couponItem) throw new Error("no coupon available");
 
   console.debug(couponItem);
