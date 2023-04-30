@@ -53,7 +53,7 @@ router.get("/run", async (ctx) => {
     ) {
       // deno-lint-ignore ban-ts-comment
       // @ts-ignore
-      validTasks.push(autoBook(value));
+      validTasks.push(autoBook(value).catch(() => {}));
       removeTaskKeys.push(db.delete(key));
     }
   }
