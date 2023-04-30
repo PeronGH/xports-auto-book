@@ -26,8 +26,9 @@ router.post("/book", async (ctx) => {
 
     await db.set(["tasks", params.date, id], params);
 
-    ctx.response.body = { id };
+    ctx.response.body = id;
   } catch (error) {
+    ctx.response.status = 500;
     ctx.response.body = error;
   }
 });
@@ -56,10 +57,13 @@ router.get("/run", async (ctx) => {
       removeTaskKeys.push(db.delete(key));
     }
   }
-
-  await Promise.all([Promise.all(validTasks), Promise.all(removeTaskKeys)]);
-
-  ctx.response.body = removeTaskKeys;
+  try {
+    await Promise.all([Promise.all(validTasks), Promise.all(removeTaskKeys)]);
+    ctx.response.body = removeTaskKeys;
+  } catch (error) {
+    ctx.response.status = 500;
+    ctx.response.body = error;
+  }
 });
 
 app.use(router.routes());
