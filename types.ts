@@ -1,5 +1,3 @@
-import { z } from "https://deno.land/x/zod@v3.21.4/mod.ts";
-
 export interface SingleTicketOrderParams {
   netUserId: string;
   serviceId: string;
@@ -433,35 +431,3 @@ export interface Trade {
   channelId: number;
   channelAppId: number;
 }
-
-const serviceName = z.enum([
-  "篮球",
-  "羽毛球",
-  "网球",
-  "壁球",
-  "乒乓球",
-  "健身",
-  "足球",
-  "武术",
-  "桌球",
-  "高尔夫",
-  "攀岩",
-  "击剑",
-  "射箭",
-  "排球",
-  "活动室",
-  "更衣室",
-]);
-
-export type ServiceName = z.infer<typeof serviceName>;
-
-export const createScheduledTaskParams = z.object({
-  newUserId: z.coerce.string(),
-  serviceName: z.string(),
-  date: z.string(),
-  timeName: z.string(),
-});
-
-export type CreateScheduledTaskParams = z.infer<
-  typeof createScheduledTaskParams
->;
