@@ -64,7 +64,7 @@ router.get("/run", async (ctx) => {
   }
   try {
     await Promise.all([Promise.all(validTasks), Promise.all(removeTaskKeys)]);
-    ctx.response.body = removeTaskKeys;
+    ctx.response.body = await Promise.all(removeTaskKeys);
   } catch (error) {
     ctx.response.status = 500;
     ctx.response.body = error;
