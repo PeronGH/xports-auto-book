@@ -1,5 +1,7 @@
 # Xports Auto Book
 
+Automatically book tickets for XJTLU Gym.
+
 ## Usage
 
 ### CLI
@@ -20,3 +22,7 @@ await autoBook({
     serviceName: "健身",
 });
 ```
+
+### Server
+
+`server.ts` can be hosted on Deno Deploy. Ensure that you have access to Deno KV.
