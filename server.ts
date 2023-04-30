@@ -33,9 +33,9 @@ router.post("/book", async (ctx) => {
   }
 });
 
-router.get("/book:id", (ctx) => {
+router.get("/book/:id", async (ctx) => {
   const { id } = ctx.params;
-  ctx.response.body = db.get(["tasks", id]);
+  ctx.response.body = await db.get(["tasks", id]);
 });
 
 router.get("/run", async (ctx) => {
