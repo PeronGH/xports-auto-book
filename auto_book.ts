@@ -76,7 +76,7 @@ export async function autoBook(
   );
 
   const couponItem = couponList.find((item) =>
-    parseDate(item.expireDate) > new Date() && item.balance > order.payFee
+    parseDate(item.expireDate)! > new Date() && item.balance > order.payFee
   );
   if (!couponItem) throw new Error("no coupon available");
 

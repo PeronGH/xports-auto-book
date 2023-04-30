@@ -17,7 +17,11 @@ export function getCurrentDate(): `${number}-${number}-${number}` {
   return `${year}-${month}-${day}`;
 }
 
-export function parseDate(date: string): Date {
+export function parseDate(date: string): Date | null {
   const [year, month, day] = date.split("-").map((item) => parseInt(item));
-  return new Date(year, month - 1, day);
+  const parsedDate = new Date(year, month - 1, day);
+  if (parsedDate.toString() === "Invalid Date") {
+    return null;
+  }
+  return parsedDate;
 }
